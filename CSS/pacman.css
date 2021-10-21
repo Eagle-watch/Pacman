@@ -1,0 +1,30 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    background-color: black;
+}
+#grille{
+    display: grid;
+    grid-column: 19;
+    grid-row: 22;
+    grid-template-columns: repeat(19,40px);
+    grid-template-rows: repeat(22,40px);
+    border: solid red;
+    width: fit-content;
+    margin: auto;
+    margin-top: 30px;
+}
+.mur{
+    /*background-image: url(../IMG/mur.gif);*/
+    background-color: blue;
+}
+.bonbon{
+    background-image: url(../IMG/bonbon.gif);
+}
+.sol{
+    background-image: url(../IMG/sol.gif);
+}
+.pacman{
+    background-image: url(../IMG/pacman4.gif);
+}
