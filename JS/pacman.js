@@ -37,6 +37,9 @@ let grille=[
         y:11,
         direction: 0
     }
+    let tablephantom=[
+        
+    ]
     pacman.x
     function affichegrille(){
         document.getElementById("grille").innerHTML=""
@@ -65,11 +68,12 @@ function tourdejeu(){
     affichegrille();
     bougepacman();
     colision();
-    sortie()
+    sortie();
     bonbon();
     affichescore();
     affichepacman();
     affichephantom();
+    bougephantom();
     setTimeout(gagné,50);
 }
 function affichepacman(){
@@ -143,6 +147,25 @@ function colision(){
             console.log("mur")
         }
                                     }
+        if(grille[phantom.y-1][phantom.x-1]==0) {
+            if(phantom.direction ==0) 
+            { 
+            phantom.x-- 
+            }
+            else if(phantom.direction ==1)
+            { 
+                    phantom.x++
+            }
+            else if (phantom.direction ==2)
+            { 
+            phantom.y-- 
+            }
+            else  if (phantom.direction ==3) 
+            {
+            phantom.y++
+            console.log("mur")
+            }
+            }
 }
 function bonbon(){
     if(grille[pacman.y-1][pacman.x-1]==2) {
@@ -184,6 +207,7 @@ function affichephantom(){
     divphantom.style.gridRowStart=phantom.y
 }
 function bougephantom(){
+phantom.direction=getRandomInt(4)
     if(phantom.direction ==0) { //si = 0 alors pacman bouge vers la droite
         phantom.x++ //x = axe horizontale
     }
@@ -197,3 +221,6 @@ function bougephantom(){
         phantom.y--
     }
 }
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
