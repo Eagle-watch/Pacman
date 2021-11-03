@@ -2,7 +2,12 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    background-color: black;
+    background-image: url(../IMG/Logo\ pacman.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+img{
+    max-width: 100%;
 }
 #grille{
     display: grid;
@@ -10,21 +15,32 @@
     grid-row: 22;
     grid-template-columns: repeat(19,40px);
     grid-template-rows: repeat(22,40px);
-    border: solid red;
+    border: solid white;
     width: fit-content;
     margin: auto;
     margin-top: 30px;
 }
 .mur{
-    /*background-image: url(../IMG/mur.gif);*/
-    background-color: blue;
+    background-image: url(../IMG/mur.gif);
+    /*background-color: blue;*/
 }
 .bonbon{
     background-image: url(../IMG/bonbon.gif);
 }
 .sol{
     background-image: url(../IMG/sol.gif);
+    /*background-color: white;*/
 }
 .pacman{
     background-image: url(../IMG/pacman4.gif);
+}
+.score{
+    color: white;
+    font-size: 4rem;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+    color: red;
+}
+.phantom{
+    background-image: url(../IMG/fantome_rouge1.gif);
 }
