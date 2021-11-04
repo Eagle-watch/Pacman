@@ -1,4 +1,7 @@
 document.body.addEventListener("keypress",changedirection)
+document.getElementById("restart").addEventListener(
+    "click" , rejouer
+)
 let score= 0
 let grille=[
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -24,6 +27,7 @@ let grille=[
     [0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     ];
+    let copiegrille = JSON.parse(JSON.stringify(grille));
     let pacman= {
         x:1,
         y:2,
@@ -32,13 +36,29 @@ let grille=[
         // si = 2 alors pacman descendra 
         // si = 3 pacman montera
     }
-    let phantom= {
-        x:10,
-        y:11,
-        direction: 0
-    }
+    // let phantom= {
+    //     x:10,
+    //     y:11,
+    //     direction: 0
+    // }
     let tablephantom=[
-        
+        {
+            x:10,
+            y:11,
+            direction: 0
+        },{
+            x:10,
+            y:11,
+            direction: 0
+        },{
+            x:10,
+            y:11,
+            direction: 0
+        },{
+            x:10,
+            y:11,
+            direction: 0
+        }
     ]
     pacman.x
     function affichegrille(){
@@ -68,13 +88,20 @@ function tourdejeu(){
     affichegrille();
     bougepacman();
     colision();
+    for(let i =0;i<tablephantom.length;i++){
+        colisionphantom(i);
+        sortiephantom(i);
+        affichephantom(i);
+        perdu(i);
+        bougephantom(i);
+        perdu(i);
+    }
     sortie();
     bonbon();
     affichescore();
     affichepacman();
-    affichephantom();
-    bougephantom();
     setTimeout(gagné,50);
+    
 }
 function affichepacman(){
     let divpacman= document.createElement("div")
@@ -144,28 +171,9 @@ function colision(){
         }
         else  if (pacman.direction ==3) {// si = 3 alors pacman montera
             pacman.y++
-            console.log("mur")
+            //console.log("mur")
         }
                                     }
-        if(grille[phantom.y-1][phantom.x-1]==0) {
-            if(phantom.direction ==0) 
-            { 
-            phantom.x-- 
-            }
-            else if(phantom.direction ==1)
-            { 
-                    phantom.x++
-            }
-            else if (phantom.direction ==2)
-            { 
-            phantom.y-- 
-            }
-            else  if (phantom.direction ==3) 
-            {
-            phantom.y++
-            console.log("mur")
-            }
-            }
 }
 function bonbon(){
     if(grille[pacman.y-1][pacman.x-1]==2) {
@@ -199,28 +207,80 @@ if(testgagné==true){
     clearInterval(numinterval)
 }   
 }
-function affichephantom(){
+function affichephantom(num){
     let divphantom= document.createElement("div")
-    divphantom.className= "phantom"
+    divphantom.className= "phantom"+(num%4)
     document.getElementById("grille").appendChild(divphantom)
-    divphantom.style.gridColumnStart=phantom.x
-    divphantom.style.gridRowStart=phantom.y
+    divphantom.style.gridColumnStart=tablephantom[num].x
+    divphantom.style.gridRowStart=tablephantom[num].y
 }
-function bougephantom(){
-phantom.direction=getRandomInt(4)
-    if(phantom.direction ==0) { //si = 0 alors pacman bouge vers la droite
-        phantom.x++ //x = axe horizontale
+function bougephantom(num){
+tablephantom[num].direction=getRandomInt(4)
+    if(tablephantom[num].direction ==0) { //si = 0 alors pacman bouge vers la droite
+        tablephantom[num].x++ //x = axe horizontale
     }
-    else if(phantom.direction ==1){ // si = 1 alors pacman ira as gauche
-        phantom.x--
+    else if(tablephantom[num].direction ==1){ // si = 1 alors pacman ira as gauche
+        tablephantom[num].x--
     }
-    else if (phantom.direction ==2){ // si = 2 alors pacman descendra 
-        phantom.y++ // y = axe vertical
+    else if (tablephantom[num].direction ==2){ // si = 2 alors pacman descendra 
+        tablephantom[num].y++ // y = axe vertical
     }
-    else  if (phantom.direction ==3) {// si = 3 alors pacman montera
-        phantom.y--
+    else  if (tablephantom[num].direction ==3) {// si = 3 alors pacman montera
+        tablephantom[num].y--
     }
 }
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
+function colisionphantom(num){
+      if(grille[tablephantom[num].y-1][tablephantom[num].x-1]==0) {
+         if(tablephantom[num].direction ==0) 
+        { 
+            tablephantom[num].x-- 
+           }
+             else if(tablephantom[num].direction ==1)
+             { 
+                     tablephantom[num].x++
+             }
+             else if (tablephantom[num].direction ==2)
+             { 
+             tablephantom[num].y-- 
+             }
+             else  if (tablephantom[num].direction ==3) 
+             {
+             tablephantom[num].y++
+             }
+             }
+}
+function sortiephantom(num){
+     if (tablephantom[num].x<1){
+     tablephantom[num].x = 19
+ }
+ if(tablephantom[num].x>19){
+     tablephantom[num].x = 1
+ }
+}
+function perdu(num){
+    if ( pacman.x== tablephantom[num].x && pacman.y == tablephantom[num].y){
+        alert("Vous Avez Perdu")
+        clearInterval(numinterval)
+    }
+}
+function rejouer (){
+    let nombrephantom = document.getElementById("restphantom").value
+console.log(nombrephantom)
+
+    clearInterval(numinterval)
+    grille = JSON.parse(JSON.stringify(copiegrille));
+ 
+        pacman.x = 1 
+        pacman.y = 2
+    tablephantom = []
+    for(let i =0;i<nombrephantom;i++){
+        tablephantom.push({
+            x:10, y:11, direction:0
+        })
+    }
+    score = 0
+    numinterval=setInterval(tourdejeu, 350)
+}

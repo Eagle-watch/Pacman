@@ -1,10 +1,13 @@
-*{
+body{
+    display: flex;
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
     background-image: url(../IMG/Logo\ pacman.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    max-width: 100%;
+    flex-wrap: wrap;
 }
 img{
     max-width: 100%;
@@ -19,6 +22,7 @@ img{
     width: fit-content;
     margin: auto;
     margin-top: 30px;
+    margin-bottom: 30px;
 }
 .mur{
     background-image: url(../IMG/mur.gif);
@@ -35,12 +39,47 @@ img{
     background-image: url(../IMG/pacman4.gif);
 }
 .score{
-    color: white;
+    color: red;
     font-size: 4rem;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     text-align: center;
-    color: red;
+    text-shadow: white 7px 7px 10px;
+    flex-direction: column;
+    margin: auto;
+
 }
-.phantom{
-    background-image: url(../IMG/fantome_rouge1.gif);
+.phantom0{
+background-image: url(../IMG/fantome0.gif);
+}
+.phantom1{
+background-image: url(../IMG/fantome1.gif);
+}
+.phantom2{
+background-image: url(../IMG/fantome2.gif);
+}
+.phantom3{
+background-image: url(../IMG/fantome3.gif);
+}
+.btn{
+    margin: auto;
+}
+#restart{
+    background-color: red;
+    color: white;
+    width: 300px;
+    text-align: center;
+    padding: 50px 0px;
+    font-size: 5rem;
+    display: block;
+    box-shadow: white 7px 7px 10px;
+    
+}
+#restphantom{
+    background-color: red;
+    color: white;
+    width: 300px;
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 1rem;
+    box-shadow: white 7px 7px 10px;
 }
